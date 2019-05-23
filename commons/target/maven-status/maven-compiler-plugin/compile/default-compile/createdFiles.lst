@@ -1,0 +1,4 @@
+com\socle\commons\config\SwaggerConfig.class
+com\socle\commons\exceptions\ErrorDetails.class
+com\socle\commons\exceptions\GlobalExceptionHandler.class
+com\socle\commons\exceptions\ResourceNotFoundException.class

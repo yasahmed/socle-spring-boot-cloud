@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: service-carte
+  cloud:
+    config:
+      uri: http://localhost:8762
+
+server:
+  port: ${server.port}
+  eureka:
+    client:
+      serviceUrl:
+        defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    instance:
+      preferIpAddress: true

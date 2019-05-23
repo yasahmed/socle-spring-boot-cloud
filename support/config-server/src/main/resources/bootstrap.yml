@@ -1,0 +1,20 @@
+server:
+  port: 8762
+
+  eureka:
+    client:
+      serviceUrl:
+        defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    instance:
+      preferIpAddress: true
+
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          searchLocations: file:///C:/Users/eessa/Desktop/socle/support/config-server/src/main/resources/configs/
