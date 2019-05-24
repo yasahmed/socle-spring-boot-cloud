@@ -1,10 +1,13 @@
 package com.socle.account.api;
 
+import com.socle.account.connectors.CardProxyConnector;
 import com.socle.account.domains.Account;
+import com.socle.account.dtos.Carte;
 import com.socle.account.repositories.AccountRepositorie;
 import com.socle.commons.exceptions.ResourceNotFoundException;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +23,9 @@ public class AccountController {
     @Autowired
     private AccountRepositorie accountRepositorie;
 
+    @Autowired
+    CardProxyConnector cardProxyConnector;
+
     @ApiOperation(value = "View a list of available accounts", response = List.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved list"),
@@ -27,11 +33,18 @@ public class AccountController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
+
     @GetMapping("/accounts")
     public List<Account> getAllAccounts() {
+        List<Carte> cartes = cardProxyConnector.getAllCustomers();
         return accountRepositorie.findAll();
     }
 
+    @GetMapping("/cartes")
+    public List<Carte> getAllAccountsCards() {
+        return cardProxyConnector.getAllCustomers();
+    }
+    
     @ApiOperation(value = "Get an account by Id")
     @GetMapping("/accounts/{id}")
     public ResponseEntity<Account> getAccountById(

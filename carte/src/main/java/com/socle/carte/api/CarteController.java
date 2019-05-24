@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
 
+import com.netflix.discovery.DiscoveryClient;
+import com.netflix.discovery.EurekaClient;
 import com.socle.carte.domains.Carte;
 import com.socle.carte.repositories.CarteRepository;
 import com.socle.commons.exceptions.ResourceNotFoundException;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +22,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import com.netflix.appinfo.InstanceInfo;
+import com.netflix.discovery.EurekaClient;
+import com.netflix.discovery.shared.Application;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -26,6 +34,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class CarteController {
     @Autowired
     private CarteRepository carteRepository;
+
+    //@Autowired
+    //private RestTemplate restTemplate;
+
+
+    //  @Autowired
+    //  @Qualifier("eurekaClient")
+    //  private EurekaClient eurekaClient;
 
     @ApiOperation(value = "View a list of available cartes", response = List.class)
     @ApiResponses(value = {
@@ -36,6 +52,10 @@ public class CarteController {
     })
     @GetMapping("/cartes")
     public List<Carte> getAllCartes() {
+
+//        Application application = eurekaClient.getApplication("service-account");
+        //       InstanceInfo instanceInfo = application.getInstances().get(0);
+
         return carteRepository.findAll();
     }
 
