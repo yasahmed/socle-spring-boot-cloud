@@ -1,0 +1,6 @@
+zuul:
+  routes:
+    service-carte:
+      path: /gtw-cards/**
+    service-account:
+        path: /gtw-accounts/**
