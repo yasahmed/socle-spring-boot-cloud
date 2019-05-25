@@ -1,4 +1,5 @@
 zuul:
+  ignoredServices: '*'
   routes:
     service-carte:
       path: /gtw-cards/**

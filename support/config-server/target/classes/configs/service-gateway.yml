@@ -1,4 +1,4 @@
 welcome:
   message: Welcome to Spring cloud config server
 server:
-  port: 8071
+  port: 0
